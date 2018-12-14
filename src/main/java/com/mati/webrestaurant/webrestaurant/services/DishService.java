@@ -34,6 +34,13 @@ public class DishService {
 
         return dishes;
     }
+    public List<Dish> getAllDishesByString(String string){
+        List<Dish> dishes = new ArrayList<>();
+        dishRepository.findAllByDishNameContains(string).forEach(dishes::add);
+
+        return dishes;
+
+    }
 
     public void addDish(Dish dish) {
         DishType dishType = dishTypeRepository.getOne(dish.getDishType().getDishTypeId());

@@ -7,9 +7,11 @@ import com.mati.webrestaurant.webrestaurant.entities.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -53,6 +55,10 @@ public class RestaurantController {
 
         users = userService.getUsers();
         return users;
+    }
+    @GetMapping("/users/{id}")
+    public Optional<User> getUser(@PathVariable int id){
+        return userService.getUser(id);
     }
 
     @GetMapping("/boards")
@@ -123,6 +129,31 @@ public class RestaurantController {
         dishes = dishService.getAllDishesByDishType(dishTypeId);
         return dishes;
     }
+    @GetMapping("/dishes/{dishTypeId}/{dishId}")
+    public Optional<Dish> getDish(@PathVariable int dishTypeId, @PathVariable int dishId){
+        return dishService.getDish(dishId);
+    }
+    @GetMapping("/logins")
+    public List<String> getLogins(){
+        return userService.getLogins();
+    }
+    @GetMapping("/emails")
+    public List<String> getEmails(){
+        return userService.getEmails();
+    }
+    @GetMapping(value = "/users", params = "login")
+    private List<User> getUserByLogin(@RequestParam("login") String login){
+        return  userService.getUserByLogin(login);
+    }
+    @GetMapping(value="/users", params = "email")
+    private List<User> getUserByEmail(@RequestParam("email") String email){
+        return  userService.getUserByEmail(email);
+    }
+    @GetMapping(value="/dishes", params = "string")
+    public List<Dish> getDishesByString(@RequestParam("string") String string){
+        return dishService.getAllDishesByString(string);
+    }
+
 
     @PostMapping("/boards")
     public void addBoard(@RequestBody Board board){
@@ -165,5 +196,10 @@ public class RestaurantController {
     public void deleteDish(@PathVariable int id){
         dishService.deleteDish(id);
    }
+   @DeleteMapping("users/{id}")
+    public void deleteUser(@PathVariable int id){
+        userService.deleteUser(id);
+   }
+
 
 }

@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface DishRepository extends JpaRepository<Dish,Integer> {
     public List<Dish> findAllByDishTypeDishTypeId(int dishTypeId);
+    public List<Dish> findAllByDishNameContains(String string);
 }
