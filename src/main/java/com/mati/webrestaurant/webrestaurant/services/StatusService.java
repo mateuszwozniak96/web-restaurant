@@ -25,4 +25,8 @@ public class StatusService {
     public void addStatus(Status status) {
         statusRepository.save(status);
     }
+
+    public void deleteStatusById(int statusId) {
+        statusRepository.deleteById(statusId);
+    }
 }

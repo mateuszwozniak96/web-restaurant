@@ -29,4 +29,7 @@ public class UserTypeService {
         return userTypes;
     }
 
+    public void deleteUserTypeById(int userTypeId) {
+        userTypeRepository.deleteById(userTypeId);
+        }
 }

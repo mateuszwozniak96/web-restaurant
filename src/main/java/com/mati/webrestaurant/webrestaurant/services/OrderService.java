@@ -24,12 +24,12 @@ public class OrderService {
     public List<OrderTable> getAllOrders() {
         List<OrderTable> orderTables = new ArrayList<>();
 
-        orderRepository.findAll().forEach(orderTables::add);
+        orderRepository.findAllByOrderByDateTimeDesc().forEach(orderTables::add);
 
         return orderTables;
     }
 
-    public void addOrder(OrderTable order) {
+    public int addOrder(OrderTable order) {
         User user = userRepository.getOne(order.getUser().getUserId());
         OrderTable tempOrder = order;
         tempOrder.setUser(user);
@@ -38,5 +38,18 @@ public class OrderService {
         order.setStatus(status);
 
         orderRepository.save(tempOrder);
+        return tempOrder.getOrderId();
+    }
+
+    public OrderTable getOrderById(int i) {
+        return orderRepository.getByOrderId(i);
+    }
+
+    public void deleteOrderById(int orderId) {
+        orderRepository.deleteById(orderId);
+    }
+
+    public List<OrderTable> getOrdersByUserId(int userId) {
+        return orderRepository.findAllByUserUserId(userId);
     }
 }

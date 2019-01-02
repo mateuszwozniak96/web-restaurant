@@ -37,6 +37,9 @@ public class Dish {
             CascadeType.PERSIST, CascadeType.REFRESH})
     private List<OrderDetail> orderDetails;
 
+    @Column(name="dish_image")
+    private String dishImage;
+
 
     public Dish() {
 
@@ -95,5 +98,13 @@ public class Dish {
 
     public void setDishType(DishType dishType) {
         this.dishType = dishType;
+    }
+
+    public String getDishImage() {
+        return dishImage;
+    }
+
+    public void setDishImage(String dishImage) {
+        this.dishImage = dishImage;
     }
 }

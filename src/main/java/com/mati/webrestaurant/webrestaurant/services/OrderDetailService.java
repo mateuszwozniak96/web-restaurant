@@ -39,5 +39,14 @@ public class OrderDetailService {
         orderDetail.setDish(dish);
 
         tempOrderDetail.setOrderTable(order);
+        orderDetailRepository.save(tempOrderDetail);
+    }
+
+    public List<OrderDetail> getDetailsByOrderId(int orderId) {
+        return orderDetailRepository.findAllByOrderTableOrderId(orderId);
+    }
+
+    public void deleteOrderDetailById(int orderDetailId) {
+        orderDetailRepository.deleteById(orderDetailId);
     }
 }

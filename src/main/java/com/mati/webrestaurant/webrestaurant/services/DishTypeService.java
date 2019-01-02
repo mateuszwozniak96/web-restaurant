@@ -26,4 +26,7 @@ public class DishTypeService {
         dishTypeRepository.save(dishType);
     }
 
+    public void deleteDishTypeById(int dishTypeId) {
+        dishTypeRepository.deleteById(dishTypeId);
+    }
 }

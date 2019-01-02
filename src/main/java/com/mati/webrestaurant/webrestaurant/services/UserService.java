@@ -1,10 +1,12 @@
 package com.mati.webrestaurant.webrestaurant.services;
 
 
+import com.mati.webrestaurant.webrestaurant.entities.OrderDetail;
 import com.mati.webrestaurant.webrestaurant.entities.User;
 import com.mati.webrestaurant.webrestaurant.entities.UserType;
 import com.mati.webrestaurant.webrestaurant.repositories.UserRepository;
 import com.mati.webrestaurant.webrestaurant.repositories.UserTypeRepository;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,7 @@ public class UserService {
         UserType userType = userTypeRepository.getOne(user.getUserType().getUserTypeId());
         User tempUser = user;
         tempUser.setUserType(userType);
+        tempUser.setPassword(DigestUtils.sha256Hex(tempUser.getPassword()));
         userRepository.save(tempUser);
     }
 
@@ -70,5 +73,6 @@ public class UserService {
     public List<User> getUserByEmail(String email) {
         return userRepository.findAllByEmail(email);
     }
+
 
 }

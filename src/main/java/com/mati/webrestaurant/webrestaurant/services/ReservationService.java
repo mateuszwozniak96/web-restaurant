@@ -4,7 +4,6 @@ package com.mati.webrestaurant.webrestaurant.services;
 import com.mati.webrestaurant.webrestaurant.entities.Board;
 import com.mati.webrestaurant.webrestaurant.entities.Reservation;
 import com.mati.webrestaurant.webrestaurant.entities.User;
-import com.mati.webrestaurant.webrestaurant.entities.UserType;
 import com.mati.webrestaurant.webrestaurant.repositories.BoardRepository;
 import com.mati.webrestaurant.webrestaurant.repositories.ReservationRepository;
 import com.mati.webrestaurant.webrestaurant.repositories.UserRepository;
@@ -29,12 +28,12 @@ public class ReservationService {
     public List<Reservation> getAllReservations() {
         List<Reservation> reservations = new ArrayList<>();
 
-        reservationRepository.findAll().forEach(reservations::add);
+        reservationRepository.findAllByOrderByDateTimeDesc().forEach(reservations::add);
 
         return reservations;
     }
 
-    public void addReservation(Reservation reservation) {
+    public int addReservation(Reservation reservation) {
 
         User user = userRepository.getOne(reservation.getUser().getUserId());
         Reservation tempReservation = reservation;
@@ -43,5 +42,10 @@ public class ReservationService {
         Board board = boardRepository.getOne(reservation.getBoard().getBoardId());
         tempReservation.setBoard(board);
         reservationRepository.save(tempReservation);
+        return tempReservation.getReservationId();
+    }
+
+    public void deleteReservationById(int reservationId) {
+        reservationRepository.deleteById(reservationId);
     }
 }

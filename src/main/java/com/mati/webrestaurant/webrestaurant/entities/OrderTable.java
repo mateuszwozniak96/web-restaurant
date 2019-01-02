@@ -25,8 +25,7 @@ public class OrderTable {
     @JoinColumn(name="status_id")
     private Status status;
 
-    @OneToMany(mappedBy = "orderTable", cascade = {CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "orderTable", cascade = {CascadeType.ALL})
     private List<OrderDetail> orderDetails;
 
 

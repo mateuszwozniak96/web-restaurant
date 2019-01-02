@@ -28,6 +28,9 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "is_active")
+    private int isActive;
+
 
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name="user_type_id")
@@ -41,15 +44,17 @@ public class User {
             CascadeType.PERSIST, CascadeType.REFRESH})
     private List<OrderTable> orders;
 
+
     public User() {
     }
 
-    public User(String login, String password, String email, String firstName, String lastName) {
+    public User(String login, String password, String email, String firstName, String lastName, int isActive) {
         this.login = login;
         this.password = password;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.isActive = isActive;
     }
 
     public int getUserId() {
@@ -106,5 +111,13 @@ public class User {
 
     public void setUserType(UserType userType) {
         this.userType = userType;
+    }
+
+    public int getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
     }
 }

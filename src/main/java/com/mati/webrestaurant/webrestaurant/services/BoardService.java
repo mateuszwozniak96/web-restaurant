@@ -26,4 +26,8 @@ public class BoardService {
     public void addBoard(Board board){
         boardRepository.save(board);
     }
+
+    public void deleteBoardById(int boardId) {
+        boardRepository.deleteById(boardId);
+    }
 }
