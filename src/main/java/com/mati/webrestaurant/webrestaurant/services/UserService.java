@@ -46,6 +46,7 @@ public class UserService {
     }
 
     public List<String> getLogins() {
+
         List<User> users = userRepository.findAll();
         List<String> logins = new ArrayList<>();
         for(User u: users){
