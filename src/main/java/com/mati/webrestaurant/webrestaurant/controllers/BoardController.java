@@ -1,5 +1,6 @@
 package com.mati.webrestaurant.webrestaurant.controllers;
 
+import com.google.gson.Gson;
 import com.mati.webrestaurant.webrestaurant.entities.Board;
 import com.mati.webrestaurant.webrestaurant.services.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +30,5 @@ public class BoardController {
     public void deleteBoardById(@PathVariable int boardId){
         boardService.deleteBoardById(boardId);
     }
+
 }
