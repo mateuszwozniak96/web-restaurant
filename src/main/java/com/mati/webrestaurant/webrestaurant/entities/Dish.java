@@ -1,7 +1,6 @@
 package com.mati.webrestaurant.webrestaurant.entities;
 
 
-import org.hibernate.annotations.Cache;
 
 import javax.persistence.*;
 import javax.persistence.Table;

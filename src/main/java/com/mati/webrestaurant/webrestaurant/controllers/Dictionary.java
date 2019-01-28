@@ -82,7 +82,7 @@ public class Dictionary {
     private void setEnglish() {
         Properties properties;
         properties = new Properties();
-        String InFile = "C:\\Users\\Mateusz\\IdeaProjects\\web-restaurant\\src\\main\\java\\com\\mati\\webrestaurant\\webrestaurant\\controllers\\englishLang.properties";
+        String InFile = "src/englishLang.properties";
         InputStream inputVariables = null;
         try {
             inputVariables = new FileInputStream(InFile);
@@ -160,7 +160,7 @@ public class Dictionary {
     private void setPolish(){
             Properties properties;
             properties = new Properties();
-            String InFile = "C:\\Users\\Mateusz\\IdeaProjects\\web-restaurant\\src\\main\\java\\com\\mati\\webrestaurant\\webrestaurant\\controllers\\polishLang.properties";
+            String InFile = "src/polishLang.properties";
             InputStream inputVariables = null;
             try {
                 inputVariables = new FileInputStream(InFile);
