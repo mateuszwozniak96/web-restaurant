@@ -9,8 +9,7 @@ import java.util.List;
 public class Board {
 
 
-    @OneToMany(mappedBy = "board",cascade = {CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "board",cascade = {CascadeType.ALL})
     private List<Reservation> reservations;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

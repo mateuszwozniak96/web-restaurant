@@ -32,8 +32,7 @@ public class Dish {
     private DishType dishType;
 
 
-    @OneToMany(mappedBy = "dish", cascade = {CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "dish", cascade = {CascadeType.ALL})
     private List<OrderDetail> orderDetails;
 
     @Column(name="dish_image")

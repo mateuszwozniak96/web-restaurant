@@ -1,8 +1,12 @@
 package com.mati.webrestaurant.webrestaurant.controllers;
 
+import com.mati.webrestaurant.webrestaurant.entities.OrderTable;
 import com.mati.webrestaurant.webrestaurant.entities.Reservation;
+import com.mati.webrestaurant.webrestaurant.entities.User;
 import com.mati.webrestaurant.webrestaurant.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,8 +15,9 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ReservationController {
     @Autowired
-    private ReservationService reservationService; @GetMapping("/reservations")
+    private ReservationService reservationService;
 
+    @GetMapping("/reservations")
     public List<Reservation> getReservations(){
 
         List<Reservation> reservations;
@@ -27,8 +32,14 @@ public class ReservationController {
         return reservationService.addReservation(reservation);
     }
 
+
     @DeleteMapping("/reservations/{reservationId}")
     public void deleteReservationById(@PathVariable int reservationId){
+
+
         reservationService.deleteReservationById(reservationId);
+
     }
+
+
 }

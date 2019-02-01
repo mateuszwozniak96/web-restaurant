@@ -8,6 +8,9 @@ import com.mati.webrestaurant.webrestaurant.repositories.UserRepository;
 import com.mati.webrestaurant.webrestaurant.repositories.UserTypeRepository;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,11 +25,25 @@ public class UserService {
     @Autowired
     public UserTypeRepository userTypeRepository;
 
+    @Autowired
+    private JavaMailSender javaMailSender;
+
+
+
+
     public void addUser(User user){
         UserType userType = userTypeRepository.getOne(user.getUserType().getUserTypeId());
         User tempUser = user;
         tempUser.setUserType(userType);
         tempUser.setPassword(DigestUtils.sha256Hex(tempUser.getPassword()));
+        userRepository.save(tempUser);
+        sendNotification(user);
+    }
+
+    public void updateUser(User user){
+        UserType userType = userTypeRepository.getOne(user.getUserType().getUserTypeId());
+        User tempUser = user;
+        tempUser.setUserType(userType);
         userRepository.save(tempUser);
     }
 
@@ -75,5 +92,19 @@ public class UserService {
         return userRepository.findAllByEmail(email);
     }
 
+    private  void sendNotification(User user){
+        StringBuilder emailText = new StringBuilder();
+        emailText.append("Dziękujemy za rejestrację w naszej aplikacji ")
+                 .append(user.getLogin())
+                 .append(".\nOd teraz możesz składać zamówienia oraz rezerwację.\n")
+                .append("Zyczmy przyjemnego użytkowania.\n")
+                 .append("Pozdrawia zespół Our Web Restaurant");
 
+        SimpleMailMessage mail = new SimpleMailMessage();
+        mail.setTo(user.getEmail());
+        mail.setFrom("ourwebrestaurant@gmail.com");
+        mail.setSubject("Rejestracja w serwisie Our Web Restaurant");
+        mail.setText(emailText.toString());
+        javaMailSender.send(mail);
+    }
 }

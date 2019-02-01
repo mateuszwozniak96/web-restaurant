@@ -33,7 +33,10 @@ public class OrderController {
 
         return orderService.addOrder(order);
     }
-
+    @GetMapping("/orders/{orderId}/sentmail")
+    public void sentPlaceOrderMail(@PathVariable int orderId){
+        orderService.sentPlaceOrderMail(orderId);
+    }
 
     @DeleteMapping("/orders/{orderId}")
     public void deleteOrderById(@PathVariable int orderId){

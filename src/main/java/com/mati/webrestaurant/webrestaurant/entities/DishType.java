@@ -9,8 +9,7 @@ import java.util.List;
 public class DishType {
 
 
-    @OneToMany(mappedBy = "dishType", cascade = {CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "dishType", cascade = {CascadeType.ALL})
     private List<Dish> dishes;
 
     @Id

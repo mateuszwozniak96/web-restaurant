@@ -8,8 +8,7 @@ import java.util.List;
 @Table(name="user_type")
 public class UserType {
 
-    @OneToMany(mappedBy = "userType", cascade = {CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "userType", cascade = {CascadeType.ALL})
     private List<User> users;
 
     @Id

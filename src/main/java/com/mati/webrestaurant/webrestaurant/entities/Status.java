@@ -11,8 +11,7 @@ import java.util.List;
 public class Status {
 
 
-    @OneToMany(mappedBy = "status", cascade = {CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "status", cascade = {CascadeType.ALL})
     private List<OrderTable> orderTables;
 
     @Id
